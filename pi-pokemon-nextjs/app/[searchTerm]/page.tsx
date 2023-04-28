@@ -9,8 +9,7 @@ type Props = {
 };
 
 export default async function page({ params: { searchTerm } }: Props) {
-  const apiData: Promise<SearchResult> = getPokeResults(searchTerm);
+  const apiData: Promise<Pokemon | undefined> = getPokeResults(searchTerm);
   const data = await apiData;
-  const results: Pokemon[] | undefined = data?.query?.pages;
-  return <div>page</div>;
+  return <div>{data?.name || "No such pokemon could be found"}</div>;
 }
