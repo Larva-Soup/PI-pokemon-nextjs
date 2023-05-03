@@ -11,7 +11,7 @@ export default async function getPokeResults(searchTerm: string) {
     height: res.height,
     id: res.id,
     name: res.name,
-    sprites: res.other["official-artwork"].front_default,
+    sprites: res.sprites.other["official-artwork"].front_default,
     stats: {
       hp: res.stats[0].base_stat,
       attack: res.stats[1].base_stat,
@@ -20,7 +20,7 @@ export default async function getPokeResults(searchTerm: string) {
       special_defense: res.stats[4].base_stat,
       speed: res.stats[5].base_stat,
     },
-    types: [res.types[0].type.name, res.types[1].type.name || ""],
+    types: [res.types[0].type.name, res.types[1]?.type.name || ""],
     weight: res.weight,
   };
 

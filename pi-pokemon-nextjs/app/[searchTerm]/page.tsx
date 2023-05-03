@@ -1,5 +1,6 @@
 import React from "react";
 import getPokeResults from "@/lib/getPokeResults";
+import Card from "../components/Card";
 
 //for now
 type Props = {
@@ -11,5 +12,19 @@ type Props = {
 export default async function page({ params: { searchTerm } }: Props) {
   const apiData: Promise<Pokemon | undefined> = getPokeResults(searchTerm);
   const data = await apiData;
-  return <div>{data?.name || "No such pokemon could be found"}</div>;
+
+  if (data) {
+    return (
+      <Card
+        height={data.height}
+        id={data.id}
+        name={data.name}
+        sprites={data.sprites}
+        stats={data.stats}
+        types={data.types}
+        weight={data.weight}
+      />
+    );
+  }
+  return undefined;
 }
